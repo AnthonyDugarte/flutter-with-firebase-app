@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/auth',
       routes: <String, WidgetBuilder>{
         "/": (BuildContext context) => HomePage(),
+        "/home": (BuildContext context) => HomePage(),
         "/auth": (BuildContext context) => AuthPage(),
       },
     );

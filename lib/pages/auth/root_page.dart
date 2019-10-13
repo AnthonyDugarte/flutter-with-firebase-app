@@ -12,15 +12,21 @@ class AuthPage extends StatelessWidget {
 
           switch (settings.name) {
             case 'auth/login':
-              builder = (BuildContext _) => LoginPage();
+              builder = (BuildContext _) => LoginPage(
+                    goApp: () => Navigator.of(context).pop(),
+                  );
               break;
 
             case 'auth/register':
-              builder = (BuildContext _) => RegisterPage();
+              builder = (BuildContext _) => RegisterPage(
+                    goApp: () => Navigator.of(context).pop(),
+                  );
               break;
 
             case 'auth/loading':
-              builder = (BuildContext _) => LoadingPage();
+              builder = (BuildContext _) => LoadingPage(
+                    goApp: () => Navigator.of(context).pop(),
+                  );
               break;
 
             default:

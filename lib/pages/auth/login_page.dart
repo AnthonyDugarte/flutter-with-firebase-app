@@ -4,25 +4,52 @@ import 'package:flutter_with_firebase_course/models/auth.dart';
 import 'package:flutter_with_firebase_course/pages/auth/common.dart';
 
 class LoginPage extends StatelessWidget {
+  final VoidCallback goApp;
+
+  LoginPage({@required this.goApp});
+
   @override
   Widget build(BuildContext context) => scaffolded(
         title: Text("Login"),
-        child: LoginPageView(),
+        child: LoginPageView(
+          goApp: goApp,
+        ),
       );
 }
 
 class LoginPageView extends StatefulWidget {
+  final VoidCallback goApp;
+  LoginPageView({@required this.goApp});
+
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginPageViewState createState() => _LoginPageViewState();
 }
 
-class _LoginPageState extends State<LoginPageView> {
+class _LoginPageViewState extends State<LoginPageView> {
   final Auth _auth = Auth();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   bool loading = false;
+  FocusNode _emailFocus;
+  FocusNode _passwordFocus;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _emailFocus = FocusNode();
+    _passwordFocus = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _emailFocus.dispose();
+    _passwordFocus.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) => Form(
@@ -38,37 +65,39 @@ class _LoginPageState extends State<LoginPageView> {
   List<Widget> inputBoxes() => [
         padded(
           child: TextFormField(
-            controller: _emailController,
-            readOnly: loading,
+            keyboardType: TextInputType.emailAddress,
+            validator: (String v) {
+              if (v.isEmpty) return "Email is required";
+              if (!validEmailRegex.hasMatch(v)) return "Email is not valid";
+              return null;
+            },
             decoration: InputDecoration(
               icon: Icon(Icons.email),
               labelText: "Email",
             ),
-            keyboardType: TextInputType.emailAddress,
-            validator: (String v) {
-              if (v.isEmpty) return "Email is required";
-              if (!valdEmailRegex.hasMatch(v)) return "Email is not valid";
-              return null;
-            },
+            readOnly: loading,
             autocorrect: false,
+            controller: _emailController,
+            focusNode: _emailFocus,
           ),
         ),
         padded(
           child: TextFormField(
-            controller: _passwordController,
-            readOnly: loading,
-            decoration: InputDecoration(
-              icon: Icon(Icons.lock),
-              labelText: "Password",
-            ),
             keyboardType: TextInputType.visiblePassword,
             validator: (String v) {
               if (v.isEmpty) return "Password is required";
               return null;
             },
+            decoration: InputDecoration(
+              icon: Icon(Icons.lock),
+              labelText: "Password",
+            ),
+            readOnly: loading,
             autocorrect: false,
             autofocus: false,
             obscureText: true,
+            controller: _passwordController,
+            focusNode: _passwordFocus,
           ),
         ),
       ];
@@ -76,25 +105,35 @@ class _LoginPageState extends State<LoginPageView> {
   List<Widget> buttonWidgets() => [
         RaisedButton(
           onPressed: loading ? null : validateSubmit,
+          child: Text("Login"),
           color: Colors.blue,
           textColor: Colors.white,
-          child: Text("Login"),
         ),
         FlatButton(
-            child: Text("Create an account."),
-            onPressed: loading ? null : goToRegister),
+          onPressed: loading ? null : goToRegister,
+          child: Text("Create an account."),
+        ),
       ];
 
   Future<void> validateSubmit() async {
-    if (!_formkey.currentState.validate()) return;
+    if (!_formkey.currentState.validate()) {
+      if (_emailController.text.isEmpty)
+        FocusScope.of(context).requestFocus(_emailFocus);
+      else
+        FocusScope.of(context).requestFocus(_passwordFocus);
+
+      return;
+    }
 
     setState(() => loading = true);
 
     try {
-      await _auth.singIn(
+      String userId = await _auth.singIn(
         email: _emailController.text,
         password: _passwordController.text,
       );
+
+      if (userId != null) widget.goApp();
     } on PlatformException catch (e) {
       Scaffold.of(context).showSnackBar(
         SnackBar(
@@ -103,9 +142,10 @@ class _LoginPageState extends State<LoginPageView> {
       );
 
       _passwordController.clear();
-    }
+      FocusScope.of(context).requestFocus(_passwordFocus);
 
-    setState(() => loading = false);
+      setState(() => loading = false);
+    }
   }
 
   void goToRegister() =>
