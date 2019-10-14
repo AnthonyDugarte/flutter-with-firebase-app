@@ -52,6 +52,9 @@ class _RegisterPageViewState extends State<RegisterPageView> {
     super.dispose();
   }
 
+  void focusEmail() => FocusScope.of(context).requestFocus(_emailFocus);
+  void focusPassword() => FocusScope.of(context).requestFocus(_passwordFocus);
+
   @override
   Widget build(BuildContext context) => Form(
         key: _formkey,
@@ -76,6 +79,8 @@ class _RegisterPageViewState extends State<RegisterPageView> {
               icon: Icon(Icons.email),
               labelText: "Email",
             ),
+            textInputAction: TextInputAction.next,
+            onEditingComplete: focusPassword,
             enabled: !loading,
             autocorrect: false,
             controller: _emailController,
@@ -93,6 +98,8 @@ class _RegisterPageViewState extends State<RegisterPageView> {
               icon: Icon(Icons.lock),
               labelText: "Password",
             ),
+            textInputAction: TextInputAction.done,
+            onEditingComplete: validateSubmit,
             enabled: !loading,
             autocorrect: false,
             autofocus: false,
@@ -119,9 +126,9 @@ class _RegisterPageViewState extends State<RegisterPageView> {
   Future<void> validateSubmit() async {
     if (!_formkey.currentState.validate()) {
       if (_emailController.text.isEmpty)
-        FocusScope.of(context).requestFocus(_emailFocus);
+        focusEmail();
       else
-        FocusScope.of(context).requestFocus(_passwordFocus);
+        focusPassword();
 
       return;
     }
