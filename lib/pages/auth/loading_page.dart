@@ -4,7 +4,7 @@ import "package:flutter/material.dart";
 class LoadingPage extends StatefulWidget {
   final VoidCallback goApp;
 
-  LoadingPage({@required this.goApp});
+  LoadingPage({Key key, @required this.goApp}) : super(key: key);
 
   @override
   _LoadingPageState createState() => _LoadingPageState();

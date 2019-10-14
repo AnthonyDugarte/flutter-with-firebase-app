@@ -6,7 +6,7 @@ import 'package:flutter_with_firebase_course/pages/auth/common.dart';
 class RegisterPage extends StatelessWidget {
   final VoidCallback goApp;
 
-  RegisterPage({@required this.goApp});
+  RegisterPage({Key key, @required this.goApp}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => scaffolded(
@@ -20,7 +20,7 @@ class RegisterPage extends StatelessWidget {
 class RegisterPageView extends StatefulWidget {
   final VoidCallback goApp;
 
-  RegisterPageView({@required this.goApp});
+  RegisterPageView({Key key, @required this.goApp}) : super(key: key);
 
   @override
   _RegisterPageViewState createState() => _RegisterPageViewState();
@@ -112,7 +112,7 @@ class _RegisterPageViewState extends State<RegisterPageView> {
         ),
         FlatButton(
           onPressed: loading ? null : goToLogin,
-          child: Text("Login"),
+          child: Text("Go to Login"),
         )
       ];
 

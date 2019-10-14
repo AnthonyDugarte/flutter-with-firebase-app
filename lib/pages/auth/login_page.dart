@@ -6,7 +6,7 @@ import 'package:flutter_with_firebase_course/pages/auth/common.dart';
 class LoginPage extends StatelessWidget {
   final VoidCallback goApp;
 
-  LoginPage({@required this.goApp});
+  LoginPage({Key key, @required this.goApp}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => scaffolded(
@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
 
 class LoginPageView extends StatefulWidget {
   final VoidCallback goApp;
-  LoginPageView({@required this.goApp});
+  LoginPageView({Key key, @required this.goApp}) : super(key: key);
 
   @override
   _LoginPageViewState createState() => _LoginPageViewState();

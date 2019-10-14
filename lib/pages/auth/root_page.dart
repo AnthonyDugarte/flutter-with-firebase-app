@@ -13,25 +13,26 @@ class AuthPage extends StatelessWidget {
           switch (settings.name) {
             case 'auth/login':
               builder = (BuildContext _) => LoginPage(
-                    goApp: () => Navigator.of(context).pop(),
+                    goApp: () => Navigator.of(context).popAndPushNamed("/"),
                   );
               break;
 
             case 'auth/register':
               builder = (BuildContext _) => RegisterPage(
-                    goApp: () => Navigator.of(context).pop(),
+                    goApp: () => Navigator.of(context).popAndPushNamed("/"),
                   );
               break;
 
             case 'auth/loading':
               builder = (BuildContext _) => LoadingPage(
-                    goApp: () => Navigator.of(context).pop(),
+                    goApp: () => Navigator.of(context).popAndPushNamed("/"),
                   );
               break;
 
             default:
               throw Exception('Invalid route: ${settings.name}');
           }
+
           return MaterialPageRoute(
             builder: builder,
             settings: settings,
