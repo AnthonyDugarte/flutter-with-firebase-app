@@ -151,7 +151,7 @@ class _RegisterPageViewState extends State<RegisterPageView> {
 
       _emailController.clear();
       _passwordController.clear();
-      FocusScope.of(context).requestFocus(_emailFocus);
+      focusEmail();
 
       setState(() => loading = false);
     }

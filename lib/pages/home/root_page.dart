@@ -14,7 +14,9 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 _auth.signOut();
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    "/auth", (Route<dynamic> r) => r == null);
+                  "/auth",
+                  (Route<dynamic> r) => r == null,
+                );
               },
             ),
           ],
