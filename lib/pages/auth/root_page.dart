@@ -13,19 +13,19 @@ class AuthPage extends StatelessWidget {
           switch (settings.name) {
             case 'auth/login':
               builder = (BuildContext _) => LoginPage(
-                    goApp: () => Navigator.of(context).popAndPushNamed("/"),
+                    finishAuth: () => goToHome(context),
                   );
               break;
 
             case 'auth/register':
               builder = (BuildContext _) => RegisterPage(
-                    goApp: () => Navigator.of(context).popAndPushNamed("/"),
+                    finishAuth: () => goToHome(context),
                   );
               break;
 
             case 'auth/loading':
               builder = (BuildContext _) => LoadingPage(
-                    goApp: () => Navigator.of(context).popAndPushNamed("/"),
+                    finishAuth: () => goToHome(context),
                   );
               break;
 
@@ -39,4 +39,9 @@ class AuthPage extends StatelessWidget {
           );
         },
       );
+
+  void goToHome(BuildContext context) {
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(("/"), (Route<dynamic> r) => r == null);
+  }
 }

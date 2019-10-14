@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 
 class LoadingPage extends StatefulWidget {
-  final VoidCallback goApp;
+  final VoidCallback finishAuth;
 
-  LoadingPage({Key key, @required this.goApp}) : super(key: key);
+  LoadingPage({Key key, @required this.finishAuth}) : super(key: key);
 
   @override
   _LoadingPageState createState() => _LoadingPageState();
@@ -24,7 +24,7 @@ class _LoadingPageState extends State<LoadingPage> {
     FirebaseUser user = await _firebaseAuth.currentUser();
 
     if (user != null)
-      widget.goApp();
+      widget.finishAuth();
     else
       Navigator.of(context).pushReplacementNamed("auth/login");
   }

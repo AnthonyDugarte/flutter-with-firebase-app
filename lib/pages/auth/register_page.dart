@@ -4,23 +4,23 @@ import 'package:flutter_with_firebase_course/models/auth.dart';
 import 'package:flutter_with_firebase_course/pages/auth/common.dart';
 
 class RegisterPage extends StatelessWidget {
-  final VoidCallback goApp;
+  final VoidCallback finishAuth;
 
-  RegisterPage({Key key, @required this.goApp}) : super(key: key);
+  RegisterPage({Key key, @required this.finishAuth}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => scaffolded(
         title: Text("Register"),
         child: RegisterPageView(
-          goApp: goApp,
+          finishAuth: finishAuth,
         ),
       );
 }
 
 class RegisterPageView extends StatefulWidget {
-  final VoidCallback goApp;
+  final VoidCallback finishAuth;
 
-  RegisterPageView({Key key, @required this.goApp}) : super(key: key);
+  RegisterPageView({Key key, @required this.finishAuth}) : super(key: key);
 
   @override
   _RegisterPageViewState createState() => _RegisterPageViewState();
@@ -76,7 +76,7 @@ class _RegisterPageViewState extends State<RegisterPageView> {
               icon: Icon(Icons.email),
               labelText: "Email",
             ),
-            readOnly: loading,
+            enabled: !loading,
             autocorrect: false,
             controller: _emailController,
             focusNode: _emailFocus,
@@ -93,7 +93,7 @@ class _RegisterPageViewState extends State<RegisterPageView> {
               icon: Icon(Icons.lock),
               labelText: "Password",
             ),
-            readOnly: loading,
+            enabled: !loading,
             autocorrect: false,
             autofocus: false,
             obscureText: true,
@@ -134,7 +134,7 @@ class _RegisterPageViewState extends State<RegisterPageView> {
         password: _passwordController.text,
       );
 
-      if (userId != null) widget.goApp();
+      if (userId != null) widget.finishAuth();
     } on PlatformException catch (e) {
       Scaffold.of(context).showSnackBar(
         SnackBar(

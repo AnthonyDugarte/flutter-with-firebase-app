@@ -9,12 +9,12 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           title: Text("Home"),
           actions: <Widget>[
-            RaisedButton(
-              child: Icon(Icons.close),
+            IconButton(
+              icon: Icon(Icons.close),
               onPressed: () {
-                debugPrint("HEHE");
                 _auth.signOut();
-                Navigator.of(context).popAndPushNamed("/auth");
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    "/auth", (Route<dynamic> r) => r == null);
               },
             ),
           ],
