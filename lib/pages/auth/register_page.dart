@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_with_firebase_course/models/auth.dart';
 import 'package:flutter_with_firebase_course/pages/auth/common.dart';
+import 'package:flutter_with_firebase_course/utils/common.dart';
 
 class RegisterPage extends StatelessWidget {
   final VoidCallback finishAuth;
