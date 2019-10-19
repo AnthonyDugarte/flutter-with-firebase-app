@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter_with_firebase_course/models/auth.dart';
+import 'package:flutter_with_firebase_course/pages/home/animal/form_page.dart';
 
 class HomePage extends StatelessWidget {
   final Auth _auth = Auth();
@@ -23,6 +24,19 @@ class HomePage extends StatelessWidget {
         ),
         body: Container(
           child: null,
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => AnimalFormPage(),
+            ),
+          ),
+          shape: StadiumBorder(),
+          backgroundColor: Colors.redAccent,
+          child: Icon(
+            Icons.add,
+            size: 20.0,
+          ),
         ),
       );
 }
