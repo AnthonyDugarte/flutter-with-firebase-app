@@ -42,6 +42,6 @@ class AuthPage extends StatelessWidget {
 
   void goToHome(BuildContext context) {
     Navigator.of(context)
-        .pushNamedAndRemoveUntil(("/"), (Route<dynamic> r) => r == null);
+        .pushNamedAndRemoveUntil(("home"), (Route<dynamic> r) => r == null);
   }
 }

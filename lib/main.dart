@@ -12,10 +12,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/auth',
+      initialRoute: 'auth',
       routes: <String, WidgetBuilder>{
-        "/": (BuildContext context) => HomePage(),
-        "/auth": (BuildContext context) => AuthPage(),
+        "home": (BuildContext context) => HomePage(),
+        "auth": (BuildContext context) => AuthPage(),
       },
     );
   }
