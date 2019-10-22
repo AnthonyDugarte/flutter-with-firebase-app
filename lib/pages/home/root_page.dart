@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:flutter_with_firebase_course/models/auth.dart';
 import 'package:flutter_with_firebase_course/pages/home/animal/form_page.dart';
+import 'package:flutter_with_firebase_course/pages/home/animal/listview_animal.dart';
 
 class HomePage extends StatelessWidget {
   final Auth _auth = Auth();
@@ -22,9 +23,6 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
-        body: Container(
-          child: null,
-        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.of(context).push(
             MaterialPageRoute(
@@ -38,5 +36,6 @@ class HomePage extends StatelessWidget {
             size: 20.0,
           ),
         ),
+        body: ListViewAnimal(context: context),
       );
 }
