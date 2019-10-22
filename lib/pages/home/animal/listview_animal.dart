@@ -26,7 +26,7 @@ class _ListViewAnimalState extends State<ListViewAnimal> {
 
     onAddedSubs = ref.onChildAdded.listen(onEntryAdded);
     onChangedSubs = ref.onChildChanged.listen(onEntryChanged);
-    onChangedSubs = ref.onChildRemoved.listen(onEntryRemoved);
+    // onChangedSubs = ref.onChildRemoved.listen(onEntryRemoved);
   }
 
   void onEntryChanged(Event e) {
@@ -44,16 +44,22 @@ class _ListViewAnimalState extends State<ListViewAnimal> {
     });
   }
 
-  void onEntryRemoved(Event e) {
-    Animal oldEntry =
-        animals.singleWhere((Animal entry) => entry.key == e.snapshot.key);
+  // void onEntryRemoved(Event e) {
+  //   Animal oldEntry =
+  //       animals.singleWhere((Animal entry) => entry.key == e.snapshot.key);
+
+  //   setState(() {
+  //     animals.removeAt(animals.indexOf(oldEntry));
+  //   });
+  // }
+
+  void deleteItem(int index) {
+    ref.child(animals[index].key).remove();
 
     setState(() {
-      animals.removeAt(animals.indexOf(oldEntry));
+      animals.removeAt(index);
     });
   }
-
-  void deleteItem(int index) => ref.child(animals[index].key).remove();
 
   @override
   Widget build(BuildContext context) => ListView.builder(
