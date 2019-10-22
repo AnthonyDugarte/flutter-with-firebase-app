@@ -26,14 +26,7 @@ class _ListViewAnimalState extends State<ListViewAnimal> {
 
     onAddedSubs = ref.onChildAdded.listen(onEntryAdded);
     onChangedSubs = ref.onChildChanged.listen(onEntryChanged);
-  }
-
-  @override
-  void dispose() {
-    onAddedSubs.cancel();
-    onChangedSubs.cancel();
-
-    super.dispose();
+    onChangedSubs = ref.onChildRemoved.listen(onEntryRemoved);
   }
 
   void onEntryChanged(Event e) {
@@ -51,13 +44,38 @@ class _ListViewAnimalState extends State<ListViewAnimal> {
     });
   }
 
+  void onEntryRemoved(Event e) {
+    Animal oldEntry =
+        animals.singleWhere((Animal entry) => entry.key == e.snapshot.key);
+
+    setState(() {
+      animals.removeAt(animals.indexOf(oldEntry));
+    });
+  }
+
+  void deleteItem(int index) => ref.child(animals[index].key).remove();
+
   @override
   Widget build(BuildContext context) => ListView.builder(
         shrinkWrap: true,
         itemCount: animals.length,
-        itemBuilder: (BuildContext context, int index) => CardViewAnimal(
-          context: context,
-          animal: animals[index],
+        itemBuilder: (BuildContext context, int index) => Dismissible(
+          key: ObjectKey(animals[index]),
+          onDismissed: (DismissDirection direction) {
+            deleteItem(index);
+          },
+          child: CardViewAnimal(
+            context: context,
+            animal: animals[index],
+          ),
         ),
       );
+
+  @override
+  void dispose() {
+    onAddedSubs.cancel();
+    onChangedSubs.cancel();
+
+    super.dispose();
+  }
 }
