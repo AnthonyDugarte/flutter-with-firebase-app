@@ -131,7 +131,7 @@ class _AnimalFormPageState extends State<AnimalForm> {
     if (widget.animal != null && widget.animal.image != null)
       return FadeInImage.assetNetwork(
         image: widget.animal.image,
-        placeholder: "Pet :3",
+        placeholder: "assets/images/flying_dog.jpg",
       );
 
     return Text("No pet image");
