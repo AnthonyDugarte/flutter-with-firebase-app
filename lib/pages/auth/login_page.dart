@@ -114,7 +114,7 @@ class _LoginPageViewState extends State<LoginPageView> {
         RaisedButton(
           onPressed: loading ? null : validateSubmit,
           child: Text("Login"),
-          color: Colors.blue,
+          color: Theme.of(context).primaryColor,
           textColor: Colors.white,
         ),
         FlatButton(

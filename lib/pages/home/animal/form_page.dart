@@ -70,6 +70,7 @@ class _AnimalFormPageState extends State<AnimalForm> {
           ),
           RaisedButton(
             child: Text("Selecciona una imagen"),
+            color: Theme.of(context).primaryColorLight,
             onPressed: !loading ? imageSelectGalery : null,
           ),
           SizedBox(
@@ -77,6 +78,7 @@ class _AnimalFormPageState extends State<AnimalForm> {
           ),
           RaisedButton(
             child: Text("Guardar"),
+            color: Theme.of(context).primaryColorDark,
             onPressed: !loading ? sendData : null,
           ),
         ],

@@ -115,7 +115,7 @@ class _RegisterPageViewState extends State<RegisterPageView> {
         RaisedButton(
           onPressed: loading ? null : validateSubmit,
           child: Text("Register"),
-          color: Colors.blue,
+          color: Theme.of(context).primaryColor,
           textColor: Colors.white,
         ),
         FlatButton(
