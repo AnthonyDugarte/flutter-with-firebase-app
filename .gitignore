@@ -11,6 +11,9 @@
 google-services.json
 GoogleService-Info.plist
 
+android/key.*
+android/key.*
+
 # IntelliJ related
 *.iml
 *.ipr
