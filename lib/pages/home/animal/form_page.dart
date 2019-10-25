@@ -133,10 +133,11 @@ class _AnimalFormPageState extends State<AnimalForm> {
     if (widget.animal != null && widget.animal.image != null)
       return FadeInImage.assetNetwork(
         image: widget.animal.image,
+        fit: BoxFit.contain,
         placeholder: "assets/images/flying_dog.jpg",
       );
 
-    return Text("No pet image");
+    return Image.asset("assets/images/flying_dog.jpg");
   }
 
   Future<void> imageSelectGalery() async {
