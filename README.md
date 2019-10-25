@@ -16,6 +16,33 @@ A new Flutter project.
 -   On Firebase apps. Select or create iOS and download **GoogleService-Info.plist** file.
 -   Save **GoogleService-Info.plist** on _ios/Runner_ folder.
 
+### Singing
+
+#### Android
+
+-   [Create a key store](https://flutter.dev/docs/deployment/android#create-a-keystore)
+
+Mac/Linux:
+
+```bash
+keytool -genkey -v -keystore ~/key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
+```
+
+Windows:
+
+```bash
+keytool -genkey -v -keystore c:/Users/USER_NAME/key.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias key
+```
+
+-   Create _android/key.properties_ file with following content:
+
+```bash
+    storePassword=<password from previous step>
+    keyPassword=<password from previous step>
+    keyAlias=key
+    storeFile=<location of the key store file, such as /Users/<user name>/key.jks>
+```
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
@@ -28,3 +55,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+```
+
+```
