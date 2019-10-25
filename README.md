@@ -43,6 +43,12 @@ keytool -genkey -v -keystore c:/Users/USER_NAME/key.jks -storetype JKS -keyalg R
     storeFile=<location of the key store file, such as /Users/<user name>/key.jks>
 ```
 
+### Building APK
+
+```bash
+flutter build apk
+```
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
