@@ -14,7 +14,7 @@ class AnimalFormPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => scaffolded(
-        title: Text("${animal != null ? "Update" : "Create"} Pet"),
+        title: Text("${animal != null ? "Update" : "Add"} Pet"),
         child: AnimalForm(
           animal: animal,
         ),
