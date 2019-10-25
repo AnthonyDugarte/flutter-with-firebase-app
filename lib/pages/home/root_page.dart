@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           shape: StadiumBorder(),
-          backgroundColor: Colors.redAccent,
+          backgroundColor: Theme.of(context).primaryColor,
           child: Icon(
             Icons.add,
             size: 20.0,
