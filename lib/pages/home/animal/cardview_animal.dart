@@ -8,59 +8,76 @@ class CardViewAnimal extends StatelessWidget {
 
   CardViewAnimal({@required this.context, @required this.animal});
 
-  @override
-  Widget build(BuildContext context) => InkWell(
-        onTap: () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (BuildContext context) => AnimalFormPage(
-              animal: animal,
-            ),
+  Widget get petImage => ClipOval(
+        child: FadeInImage.assetNetwork(
+          image: animal.image,
+          height: 100.0,
+          width: 100.0,
+          fit: BoxFit.cover,
+          placeholder: "assets/images/flying_dog.jpg",
+        ),
+      );
+
+  void onTapHandler() => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (BuildContext context) => AnimalFormPage(
+            animal: animal,
           ),
         ),
+      );
+
+  Widget contentRow({Icon icon, Widget content}) => Row(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(7.0),
+            child: icon,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: content,
+            ),
+          ),
+        ],
+      );
+
+  @override
+  Widget build(BuildContext context) => InkWell(
+        onTap: onTapHandler,
         child: Card(
-          child: Column(
+          child: Row(
             children: <Widget>[
-              Container(
-                height: 144.0,
-                width: 500.0,
-                color: Colors.green,
-                child: FadeInImage.assetNetwork(
-                  image: animal.image,
-                  height: 144.0,
-                  width: 160.0,
-                  placeholder: "assets/images/flying_dog.jpg",
-                ),
-              ),
               Padding(
                 padding: EdgeInsets.all(7.0),
-                child: Row(
+                child: petImage,
+              ),
+              Expanded(
+                child: Column(
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(7.0),
-                      child: Icon(Icons.pets),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(7.0),
-                      child: Text(
+                    contentRow(
+                      icon: Icon(
+                        Icons.pets,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                      content: Text(
                         animal.name,
                         style: TextStyle(
                           fontSize: 18.0,
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(7.0),
-                      child: Icon(Icons.cake),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(7.0),
-                      child: Text(
+                    contentRow(
+                      icon: Icon(
+                        Icons.cake,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                      content: Text(
                         animal.age,
                         style: TextStyle(
                           fontSize: 18.0,
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
