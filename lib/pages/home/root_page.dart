@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text("Pets"),
+          title: Text("Our Pets"),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.close),
